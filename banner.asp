@@ -8,32 +8,21 @@
 </div>
 <div id=top-right>
 <p>
-<?php
-if(!isset($_SESSION['username']))
-{   
-    echo  '<a href="login.php" target="_blank">Login|</a>';
-    echo  '<a href="reg.php" target=_blank">Reg</a>';
-}
-else
-{       
-    echo  '<a>Welcome!'.$_SESSION['username'].'</a>';
-    echo  '<a href="manager.php">|Manager|</a>';
-    echo  '<a href="login.php?action=logout">Logout</a>';
-}
-?>
+<%="<a href='login.asp' target='_blank'>Login|</a>"%>
+<%="<a href='reg.asp' target='_blank'>Reg</a>"%>
 </p>
 </div>
 </div>
 <div id=ban></div>
 <div id=nav>
 <ul id=bar>
-<?php
-@$query_type=mysqli_query($conn,"SELECT * FROM sort order by sort_id"); 
-while(@$row=mysqli_fetch_array($query_type))
-{ 
-echo  '<li><a href="sort.php?sort_id='.@$row[sort_id].'">'.@$row[sort_name].'</a></li>';
-}
-?>
+<%
+dim tmp
+tmp=ap_query("SELECT sort_id,sort_name FROM sort order by sort_id")
+For i=0 To ubound(tmp,2)  
+response.write  "<li><a href='sort.asp?sort_id="&tmp(0,i)&"'>"&tmp(1,i)&"</a></li>"
+Next  
+%>
 </ul>
 </div>
 </div>

@@ -5,6 +5,21 @@ Rs.Open sql,Conn
 ap_getsql=Rs(keyname)
 End Function
 
+Function ap_query(sql)
+Set Rs = Server.CreateObject("ADODB.Recordset")
+Rs.Open sql,Conn
+ap_query=Rs.GetRows()
+End Function
+
+Function getoption(opt)
+dim sql
+sql="SELECT keyvalue FROM setting where keyname="&opt
+Set Rs = Server.CreateObject("ADODB.Recordset")
+Rs.Open sql,Conn
+response.write Rs.GetString
+End Function
+
+
 Function ap_test()
 dim a,b
 a=1
