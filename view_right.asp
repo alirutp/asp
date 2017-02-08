@@ -3,14 +3,12 @@
 <p><span>Archives</span></p>
 <div id=tag_con>
 <ul>
-<?php
-$sql="select DATE_FORMAT(add_time, '%Y-%m') as add_time, count(*) as cnt from article where status_id=1 group by DATE_FORMAT(add_time, '%Y-%m') desc";
-@$query=mysqli_query($conn,$sql); 
-while(@$row=mysqli_fetch_array($query))
-{    
-   echo  '<li><a href="index.php?record='.$row['add_time'].'">'.$row['add_time'].'('.$row['cnt'].')</a></li>';
-}
-?>
+<%
+tmp=ap_query("select format(add_time, 'yyyy-mm') as add_time1, count(*) as cnt from article where status_id=1 group by format(add_time, 'yyyy-mm')")
+For i=0 To ubound(tmp,2)  
+response.write  "<li><a href='index.asp?record="&tmp(0,i)&"'>"&tmp(0,i)&"("&tmp(1,i)&")</a></li>"
+Next  
+%>
 </ul>
 </div>
 </div>
@@ -18,15 +16,12 @@ while(@$row=mysqli_fetch_array($query))
 <p><span>Comment</span></p>
 <div id=tag_con>
 <ul>
-<?php
-$sql="SELECT comment.comment_content,comment.id,users.username,users.nick,article.title,article.id FROM comment,article,users where comment.article_id=article.id and comment.user_id=users.id order by comment.id desc limit 5";
-@$query=mysqli_query($conn,$sql); 
-while(@$row=mysqli_fetch_array($query))
-{    
-   echo  '<li><span>'.$row[nick].'的评论：<span><a href="read.php?id='.$row[id].'">'.$row[comment_content].'</a></li>';
-
-}
-?>
+<%
+tmp=ap_query("SELECT top 5 * from (SELECT comment.comment_content,comment.id,users.username,users.nick,article.title,article.id FROM comment,article,users where comment.article_id=article.id and comment.user_id=users.id order by comment.id desc)")
+For i=0 To ubound(tmp,2)  
+response.write  "<li><span>"&tmp(3,i)&"的评论：<span><a href='read.asp?id="&tmp(5,i)&"'>"&tmp(0,i)&"</a></li>"
+Next  
+%>
 </ul>
 </div>
 </div>
@@ -34,21 +29,19 @@ while(@$row=mysqli_fetch_array($query))
 <p><span>Link</span></p>
 <div id=tag_con>
 <ul>
-<?php
-$sql="SELECT * FROM link where status=1 order by link_id";
-@$query=mysqli_query($conn,$sql); 
-while(@$row=mysqli_fetch_array($query))
-{    
-   echo  '<li><a href="'.@$row[link].'">'.@$row[note].'</a></li>';
-}
-?>
+<%
+tmp=ap_query("SELECT * FROM link where status=1 order by link_id")
+For i=0 To ubound(tmp,2)  
+response.write  "<li><a href='"&tmp(1,i)&"'>"&tmp(3,i)&"</a></li>"
+Next  
+%>
 </ul>
 </div>
 </div>
 <div id=view-right-box1>
 <p><span>Search</span></p>
 <div id=search_con>
-<form name="searchform" method="get" action="index.php">
+<form name="searchform" method="get" action="index.asp">
 <input type="text" name="keyword" id=w25 value=请输入关键词  onFocus="inputtextreplaceonfocus(this,'w25')"
 onBlur="inputtextreplaceonBlur(this,'w25')"/>
 </form>
