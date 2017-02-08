@@ -1,6 +1,4 @@
 <!--#include file="head.asp" -->
-
-
 <div id=content>
 <!--#include file="banner.asp" -->
 <%
