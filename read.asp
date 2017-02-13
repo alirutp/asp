@@ -16,24 +16,18 @@ tmp=ap_query("SELECT * FROM article where id="&id)
 </div>
 <div id=box-content>
 <p><%=tmp(3,0)%></p>
-<p>Tag:<?php
-$sql="select * from tag where article_id like '%$id%'";
-@$query=mysqli_query($conn,$sql); 
-//echo var_dump($query).'mmm';
-while(@$row=mysqli_fetch_array($query))
-{
-	if($stu)
-	{
-		$stu=$stu.','.$row[tag_name];
-	}
-	else
-		$stu=$row[tag_name];
-}
-echo $stu;
-
-?></p></div></div>
+<p>Tag:
+<%
+dim stu
+tmp=ap_query("select * from tag where article_id like '%%"&id&"%%'")
+For i=0 To ubound(tmp,2)  
+stu=tmp(1,i)&","&stu
+next
+response.write stu
+%>
+</p></div></div>
 <div id=comment>
-<?php include "comment.php";?>
+<!--#include file="comment.asp" -->
 </div>
 </div>
 <!--#include file="view_right.asp" -->

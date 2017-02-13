@@ -8,7 +8,9 @@ End Function
 Function ap_query(sql)
 Set Rs = Server.CreateObject("ADODB.Recordset")
 Rs.Open sql,Conn
+if not rs.eof then
 ap_query=Rs.GetRows()
+end if
 End Function
 
 Function getoption(opt)
