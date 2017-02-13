@@ -13,6 +13,10 @@ ap_query=Rs.GetRows()
 end if
 End Function
 
+Function ap_Exec(sql)
+Conn.Execute(sql)
+End Function
+
 Function getoption(opt)
 dim sql
 sql="SELECT keyvalue FROM setting where keyname="&opt

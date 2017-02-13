@@ -78,7 +78,7 @@ Next
 <li>
 
 
-<%="<a href='javascript:cal()'></a>"&m&"<a href='javascript:cal()'></a><a href='javascript:cal()'></a>??<a href='javascript:cal()'></a>"%>
+<%="<a href='javascript:cal()'><<</a>"&m&"月<a href='javascript:cal()'>>></a><a href='javascript:cal()'><<</a>"&y&"年<a href='javascript:cal()'>>></a>"%>
 </li>
 <li>
 <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>

@@ -6,7 +6,7 @@ function test11()
 function comment_add(comment_content,article_id)
 {
 xmlHttp=new XMLHttpRequest();
-var url="comment_add.php";
+var url="comment_add.asp";
 url=url+"?q="+comment_content+"&id="+article_id;
 //url=url+"&sid="+Math.random()
 xmlHttp.onreadystatechange=callback_comment_add;
