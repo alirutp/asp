@@ -1,5 +1,6 @@
 <!--#include file="conn.asp" -->
 <!--#include file="Function.asp" -->
+<meta http-equiv=Content-Type content="text/html;charset=gb-2312">
 <%
 dim comment_content
 comment_content=Request.QueryString("q")
@@ -7,10 +8,10 @@ id=Request.QueryString("id")
 user_id=SESSION("user_id")
 nick=SESSION("nick")
 comment_date=now()
-sql_comment="insert into comment (id,user_id,article_id,comment_content,comment_date) values ('',"&user_id&","&id&",'"&comment_content&"','"&comment_date&"')"
+sql_comment="insert into comment (user_id,article_id,comment_content,comment_date) values ("&user_id&","&id&",'"&comment_content&"','"&comment_date&"')"
 if not Isempty(comment_content) then
       if not Isempty(user_id) then
-	  ap_exec(sql)
+	  Conn.Execute sql_comment
 	  end if
 	end if
 %>  
